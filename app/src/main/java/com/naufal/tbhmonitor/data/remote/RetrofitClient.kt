@@ -78,11 +78,24 @@ object RetrofitClient {
      * - "192.168.1.5:8080"        -> "http://192.168.1.5:8080/"
      * - "http://192.168.1.5:8080" -> "http://192.168.1.5:8080/"
      * - "http://192.168.1.5:8080/" -> dibiarkan apa adanya
+     * - "https://xxxx.ngrok-free.app/api/data" -> "https://xxxx.ngrok-free.app/"
+     *   (QR code dari desktop app nyimpen URL endpoint LENGKAP sampai "/api/data",
+     *   bukan base URL polos - lihat generate_qr() di tbh-monitor/src/main.rs. Kalau
+     *   dipakai apa adanya sebagai base URL Retrofit, semua request yang pakai
+     *   relative path di ApiService, misal "api/player", jadi nyasar ke
+     *   ".../api/data/api/player" dan selalu gagal/404. Makanya scan QR gagal
+     *   connect padahal input manual - yang isinya base URL polos - berhasil.
+     *   Potong bagian "/api/..." di akhir biar keduanya normalize ke base URL
+     *   yang sama-sama benar.)
      */
     private fun normalizeBaseUrl(input: String): String {
         var url = input.trim()
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
             url = "http://$url"
+        }
+        val apiSegmentIndex = url.indexOf("/api/")
+        if (apiSegmentIndex != -1) {
+            url = url.substring(0, apiSegmentIndex + 1) // +1 biar slash-nya kebawa
         }
         if (!url.endsWith("/")) {
             url += "/"

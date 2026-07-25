@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -203,7 +204,16 @@ private fun InventoryBody(items: List<Item>, refreshErrorMessage: String?) {
                 )
             }
         } else {
-            items(filteredSorted, key = { it.uniqueId }) { item -> ItemRow(item) }
+            // uniqueId cuma dijamin unik buat item equipment per-instance -
+            // item stackable (material, currency, chest) sering gak punya field
+            // "UniqueId" di save data & default ke 0, jadi banyak item bisa
+            // punya uniqueId yang sama. Pakai key = { it.uniqueId } doang di
+            // sini bikin LazyColumn crash (IllegalArgumentException: Key was
+            // already used) begitu ada 2+ item kayak gitu. Gabung sama index
+            // biar keynya selalu unik.
+            itemsIndexed(filteredSorted, key = { index, item -> "${item.uniqueId}-${item.itemKey}-$index" }) { _, item ->
+                ItemRow(item)
+            }
         }
     }
 }
