@@ -12,7 +12,7 @@ Arsitektur: MVVM, Jetpack Compose untuk UI, Retrofit untuk networking ke backend
 6. [DONE] data/local/ConnectionPreferences.kt - simpan base URL pakai DataStore
 7. [DONE] data/repository/TbhRepository.kt - gabungkan remote + local, dipakai ViewModel
 8. [DONE] qr/QrScannerScreen.kt - scan QR pakai CameraX + ML Kit, hasil scan (raw string) dikirim lewat callback ke caller
-9. ui/theme/ - Theme.kt, Color.kt, Type.kt
+9. [DONE] ui/theme/ - Theme.kt, Color.kt, Type.kt
 10. ui/navigation/ - Screen.kt (sealed class route + label + icon buat 4 tab), NavGraph.kt (routing), BottomNavBar.kt
     - Bottom nav 4 tab: Dashboard, Heroes, Inventory, Runes (pakai NavigationBar Material3)
     - ConnectScreen, QrScannerScreen, HeroDetailScreen TIDAK ikut bottom nav (disembunyikan

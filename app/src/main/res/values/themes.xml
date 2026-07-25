@@ -1,9 +1,12 @@
 <resources>
     <!--
-        Tema dasar buat window sebelum Compose mengambil alih tampilan.
-        Warna & tipografi sesungguhnya diatur di ui/theme/ (Compose), bukan di sini.
-        Parent pakai tema platform (bukan Material Components) karena app ini 100% Compose,
-        jadi tidak butuh dependency com.google.android.material tambahan.
+        Tema dasar buat window sebelum Compose mengambil alih tampilan (mencegah flash
+        putih pas app start). Warna & tipografi sesungguhnya diatur di ui/theme/ (Compose,
+        lihat Theme.kt) - app ini sengaja cuma punya satu skema warna (dark), sesuai
+        keputusan di step 9, jadi windowBackground di sini disamain ke BgDark (#0F0F15).
     -->
-    <style name="Theme.TbhMonitor" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.TbhMonitor" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">#0F0F15</item>
+        <item name="android:statusBarColor">#0F0F15</item>
+    </style>
 </resources>
