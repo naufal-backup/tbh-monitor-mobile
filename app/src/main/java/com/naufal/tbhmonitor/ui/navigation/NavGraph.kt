@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.naufal.tbhmonitor.qr.QrScannerScreen
 import com.naufal.tbhmonitor.ui.screens.connect.ConnectScreen
+import com.naufal.tbhmonitor.ui.screens.connect.RescanQrScreen
 import com.naufal.tbhmonitor.ui.screens.dashboard.DashboardScreen
 import com.naufal.tbhmonitor.ui.screens.heroes.HeroDetailScreen
 import com.naufal.tbhmonitor.ui.screens.heroes.HeroesScreen
@@ -98,6 +99,18 @@ fun NavGraph(
 
         composable(Screen.Runes.route) {
             RunesScreen()
+        }
+
+        composable(Screen.RescanQr.route) {
+            RescanQrScreen(
+                onConnected = {
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(Screen.RescanQr.route) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                },
+                onCancel = { navController.popBackStack() }
+            )
         }
     }
 }

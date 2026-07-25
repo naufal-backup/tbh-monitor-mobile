@@ -33,6 +33,14 @@ sealed class Screen(val route: String) {
         fun createRoute(heroKey: Long) = "hero_detail/$heroKey"
     }
 
+    /**
+     * Scan QR ulang buat ganti/reconnect ke server lain - dibuka dari tombol aksi di
+     * BottomNavBar (BUKAN salah satu dari 4 tab utama), beda dari [QrScanner] yang cuma
+     * dipakai di alur onboarding awal ([Connect]). Hasil scan langsung diproses di sini
+     * sendiri (connectWithUrl), gak perlu bounce balik lewat SavedStateHandle kayak QrScanner.
+     */
+    data object RescanQr : Screen("rescan_qr")
+
     /** Tab bottom nav 3/4 - daftar item, search/filter/sort. */
     data object Inventory : Screen("inventory")
 

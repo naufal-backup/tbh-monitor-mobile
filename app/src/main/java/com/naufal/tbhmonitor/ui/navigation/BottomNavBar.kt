@@ -5,6 +5,7 @@ import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Dashboard
 import androidx.compose.material.icons.filled.Groups
 import androidx.compose.material.icons.filled.Inventory2
+import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -44,9 +45,15 @@ fun shouldShowBottomBar(route: String?): Boolean =
     bottomNavItems.any { it.screen.route == route }
 
 /**
- * Bottom navigation bar Material3. Klik tab pakai pola standar Navigation Compose:
- * popUpTo(startDestination){saveState=true} + launchSingleTop + restoreState, biar state
- * tiap tab (misal posisi scroll Inventory) gak ke-reset pas pindah-pindah tab.
+ * Bottom navigation bar Material3. 4 item pertama ([bottomNavItems]) klik pakai pola
+ * standar Navigation Compose: popUpTo(startDestination){saveState=true} + launchSingleTop
+ * + restoreState, biar state tiap tab (misal posisi scroll Inventory) gak ke-reset pas
+ * pindah-pindah tab.
+ *
+ * Item ke-5 ("Scan") SENGAJA beda - itu tombol aksi buka [Screen.RescanQr] (halaman kamera
+ * buat scan ulang QR & ganti/reconnect server), BUKAN tab konten yang persistent, jadi
+ * `selected` di-hardcode false (gak pernah "aktif" kayak 4 tab lainnya) dan navigate-nya gak
+ * pakai popUpTo/saveState - cukup di-push biasa, balik lewat tombol back/batal di halamannya.
  */
 @Composable
 fun BottomNavBar(navController: NavController) {
@@ -72,5 +79,12 @@ fun BottomNavBar(navController: NavController) {
                 label = { Text(item.label) }
             )
         }
+
+        NavigationBarItem(
+            selected = false,
+            onClick = { navController.navigate(Screen.RescanQr.route) },
+            icon = { Icon(Icons.Filled.QrCodeScanner, contentDescription = "Scan QR") },
+            label = { Text("Scan") }
+        )
     }
 }

@@ -40,6 +40,12 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
         _uiState.update { it.copy(manualUrlInput = value, errorMessage = null) }
     }
 
+    /** Dipakai RescanQrScreen buat balik nampilin kamera lagi sesudah gagal connect,
+     *  tanpa perlu nyentuh manualUrlInput (beda dari onManualUrlChange). */
+    fun clearError() {
+        _uiState.update { it.copy(errorMessage = null) }
+    }
+
     /**
      * Simpan [url] sebagai base URL baru, lalu langsung tes beneran nyambung atau
      * enggak (panggil getPlayer()) sebelum navigasi ke Dashboard - biar user gak
