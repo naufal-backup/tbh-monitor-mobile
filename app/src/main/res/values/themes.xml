@@ -1,0 +1,9 @@
+<resources>
+    <!--
+        Tema dasar buat window sebelum Compose mengambil alih tampilan.
+        Warna & tipografi sesungguhnya diatur di ui/theme/ (Compose), bukan di sini.
+        Parent pakai tema platform (bukan Material Components) karena app ini 100% Compose,
+        jadi tidak butuh dependency com.google.android.material tambahan.
+    -->
+    <style name="Theme.TbhMonitor" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

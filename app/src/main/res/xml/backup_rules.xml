@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!--
+        Tidak ada data sensitif buat di-exclude - satu-satunya data lokal cuma base URL
+        koneksi (DataStore, lihat ConnectionPreferences), aman buat ikut ke-backup.
+    -->
+</full-backup-content>
