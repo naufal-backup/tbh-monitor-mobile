@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Pedang pixel-art sederhana - bentuk blocky (bukan pedang halus/realistis) sengaja
+    dipilih biar konsisten sama identitas game aslinya (TBH: Task Bar Hero, pixel-art
+    hero kecil di taskbar Windows) dan tetap kebaca jelas di ukuran launcher icon yang kecil.
+
+    Grid 8 kolom x 11 baris, 1 sel = 6dp, dipusatkan di canvas 108x108dp (safe zone 66x66dp,
+    offset 21dp tiap sisi - grid ini pas 48dp lebar x 66dp tinggi, nempel pas di batas atas
+    & bawah safe zone).
+
+    Blade (steel, TextPrimary #E5E7EB) - Hilt: crossguard + handle + pommel (gold, Yellow #EAB308).
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Blade: kolom 3-4, baris 0-6 -->
+    <path
+        android:pathData="M48,21H60V63H48Z"
+        android:fillColor="#E5E7EB" />
+
+    <!-- Hilt: crossguard (baris 7) + handle (baris 8-9) + pommel (baris 10, sedikit lebih lebar) -->
+    <path
+        android:pathData="M36,63H72V69H36ZM48,69H60V81H48ZM42,81H66V87H42Z"
+        android:fillColor="#EAB308" />
+</vector>

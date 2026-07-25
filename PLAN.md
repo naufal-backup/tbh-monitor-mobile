@@ -58,3 +58,11 @@ Local storage
 Opsional
 - io.coil-kt:coil-compose, kalau nanti ada icon/gambar item
 - accompanist-permissions, buat handle izin kamera di Compose
+
+## Tambahan setelah 16 step
+
+- [DONE] App launcher icon (adaptive icon, XML murni - minSdk 26 gak butuh PNG raster
+  fallback). Pedang pixel-art (steel blade + gold hilt) di atas background BgDark,
+  konsisten sama palet ui/theme/Color.kt. Termasuk versi monochrome buat themed icon
+  Android 13+. File: res/drawable/ic_launcher_foreground.xml, ic_launcher_monochrome.xml,
+  res/mipmap-anydpi-v26/ic_launcher.xml + ic_launcher_round.xml, res/values/colors.xml

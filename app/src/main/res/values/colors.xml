@@ -1,0 +1,4 @@
+<resources>
+    <!-- Sama persis dengan BgDark di ui/theme/Color.kt, biar launcher icon konsisten sama tema app. -->
+    <color name="ic_launcher_background">#0F0F15</color>
+</resources>
