@@ -1,15 +1,8 @@
 package com.naufal.tbhmonitor.ui.navigation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -19,12 +12,13 @@ import androidx.navigation.navArgument
 import com.naufal.tbhmonitor.qr.QrScannerScreen
 import com.naufal.tbhmonitor.ui.screens.connect.ConnectScreen
 import com.naufal.tbhmonitor.ui.screens.dashboard.DashboardScreen
+import com.naufal.tbhmonitor.ui.screens.heroes.HeroDetailScreen
+import com.naufal.tbhmonitor.ui.screens.heroes.HeroesScreen
+import com.naufal.tbhmonitor.ui.screens.inventory.InventoryScreen
+import com.naufal.tbhmonitor.ui.screens.runes.RunesScreen
 
 /**
- * Root NavHost buat semua screen. Screen yang belum dibikin (Heroes, HeroDetail,
- * Inventory, Runes - step 13-15) sementara diisi [PlaceholderScreen] biar project ini
- * tetap compile & bisa dijalanin buat testing Connect + Dashboard lebih dulu. Ganti
- * composable-nya satu-satu begitu step terkait selesai.
+ * Root NavHost buat semua screen.
  */
 @Composable
 fun NavGraph(
@@ -80,7 +74,9 @@ fun NavGraph(
         }
 
         composable(Screen.Heroes.route) {
-            PlaceholderScreen("HeroesScreen - step 13")
+            HeroesScreen(
+                onHeroClick = { heroKey -> navController.navigate(Screen.HeroDetail.createRoute(heroKey)) }
+            )
         }
 
         composable(
@@ -90,27 +86,18 @@ fun NavGraph(
             )
         ) { backStackEntry ->
             val heroKey = backStackEntry.arguments?.getLong(Screen.HeroDetail.ARG_HERO_KEY) ?: 0L
-            PlaceholderScreen("HeroDetailScreen - step 13 (heroKey=$heroKey)")
+            HeroDetailScreen(
+                heroKey = heroKey,
+                onBack = { navController.popBackStack() }
+            )
         }
 
         composable(Screen.Inventory.route) {
-            PlaceholderScreen("InventoryScreen - step 14")
+            InventoryScreen()
         }
 
         composable(Screen.Runes.route) {
-            PlaceholderScreen("RunesScreen - step 15")
+            RunesScreen()
         }
-    }
-}
-
-@Composable
-private fun PlaceholderScreen(text: String) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = text, style = MaterialTheme.typography.bodyLarge)
     }
 }
