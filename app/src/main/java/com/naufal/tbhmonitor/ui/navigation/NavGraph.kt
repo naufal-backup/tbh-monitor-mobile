@@ -6,21 +6,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.naufal.tbhmonitor.qr.QrScannerScreen
+import com.naufal.tbhmonitor.ui.screens.connect.ConnectScreen
 
 /**
- * Root NavHost buat semua screen. Screen yang belum dibikin (Connect, Dashboard, Heroes,
- * HeroDetail, Inventory, Runes - step 11-15) sementara diisi [PlaceholderScreen] biar
- * project ini tetap compile & bisa dijalanin buat testing QrScannerScreen lebih dulu.
- * Ganti composable-nya satu-satu begitu step terkait selesai.
+ * Root NavHost buat semua screen. Screen yang belum dibikin (Dashboard, Heroes, HeroDetail,
+ * Inventory, Runes - step 12-15) sementara diisi [PlaceholderScreen] biar project ini tetap
+ * compile & bisa dijalanin buat testing Connect + QrScannerScreen lebih dulu. Ganti
+ * composable-nya satu-satu begitu step terkait selesai.
  */
 @Composable
 fun NavGraph(
@@ -33,15 +36,31 @@ fun NavGraph(
         startDestination = startDestination,
         modifier = modifier
     ) {
-        composable(Screen.Connect.route) {
-            PlaceholderScreen("ConnectScreen - step 11")
+        composable(Screen.Connect.route) { backStackEntry ->
+            val scannedUrl by backStackEntry.savedStateHandle
+                .getStateFlow<String?>(Screen.QrScanner.RESULT_KEY_SCANNED_URL, null)
+                .collectAsStateWithLifecycle()
+
+            ConnectScreen(
+                scannedUrl = scannedUrl,
+                onConsumedScannedUrl = {
+                    backStackEntry.savedStateHandle[Screen.QrScanner.RESULT_KEY_SCANNED_URL] = null
+                },
+                onNavigateToQrScanner = { navController.navigate(Screen.QrScanner.route) },
+                onConnected = {
+                    navController.navigate(Screen.Dashboard.route) {
+                        popUpTo(Screen.Connect.route) { inclusive = true }
+                    }
+                }
+            )
         }
 
         composable(Screen.QrScanner.route) {
             QrScannerScreen(
                 onQrCodeScanned = { url ->
-                    // TODO (step 11): repository.connect(url) lewat ConnectViewModel dulu,
-                    // baru navigate ke Dashboard + popBackStack sampai start destination.
+                    navController.previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set(Screen.QrScanner.RESULT_KEY_SCANNED_URL, url)
                     navController.popBackStack()
                 },
                 onCancel = { navController.popBackStack() }

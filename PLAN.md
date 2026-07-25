@@ -18,7 +18,7 @@ Arsitektur: MVVM, Jetpack Compose untuk UI, Retrofit untuk networking ke backend
     - ConnectScreen, QrScannerScreen, HeroDetailScreen TIDAK ikut bottom nav (disembunyikan
       berdasarkan currentBackStackEntryAsState() route)
     - Klik tab pakai pola popUpTo(startDestination){saveState=true} + launchSingleTop + restoreState
-11. ui/screens/connect/ConnectScreen.kt + ConnectViewModel.kt - screen awal, scan QR / input manual URL
+11. [DONE] ui/screens/connect/ConnectScreen.kt + ConnectViewModel.kt - screen awal, scan QR / input manual URL
 12. ui/screens/dashboard/DashboardScreen.kt + DashboardViewModel.kt - ringkasan gold, hero, item, progres rune
 13. ui/screens/heroes/HeroesScreen.kt, HeroDetailScreen.kt + HeroesViewModel.kt
 14. ui/screens/inventory/InventoryScreen.kt + InventoryViewModel.kt - list, search, filter, sorting

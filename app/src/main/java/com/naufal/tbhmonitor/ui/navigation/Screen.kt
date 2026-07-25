@@ -10,7 +10,14 @@ sealed class Screen(val route: String) {
     data object Connect : Screen("connect")
 
     /** Kamera scan QR (CameraX + ML Kit), dibuka dari ConnectScreen. */
-    data object QrScanner : Screen("qr_scanner")
+    data object QrScanner : Screen("qr_scanner") {
+        /**
+         * Key SavedStateHandle buat kirim hasil scan balik ke ConnectScreen - pola
+         * standar Navigation Compose buat "return a result" antar screen tanpa
+         * perlu share instance ViewModel. Lihat NavGraph.kt & ConnectScreen.kt.
+         */
+        const val RESULT_KEY_SCANNED_URL = "scanned_url"
+    }
 
     /** Tab bottom nav 1/4 - ringkasan gold, hero, item, progres rune. */
     data object Dashboard : Screen("dashboard")
