@@ -64,6 +64,16 @@ object RetrofitClient {
     fun currentBaseUrlOrNull(): String? = currentBaseUrl
 
     /**
+     * Reset state balik ke "belum connect" - dipanggil pas user disconnect (lihat
+     * TbhRepository.disconnect()), biar getApiServiceOrNull() balikin null lagi
+     * alih-alih tetap ngarah ke server lama yang udah "dilupakan" di local storage.
+     */
+    fun clear() {
+        currentBaseUrl = null
+        currentApiService = null
+    }
+
+    /**
      * Terima input fleksibel dari hasil scan QR / input manual, contoh:
      * - "192.168.1.5:8080"        -> "http://192.168.1.5:8080/"
      * - "http://192.168.1.5:8080" -> "http://192.168.1.5:8080/"
