@@ -9,7 +9,7 @@ Arsitektur: MVVM, Jetpack Compose untuk UI, Retrofit untuk networking ke backend
 3. [DONE] data/model/ - Player.kt, Hero.kt, Item.kt, Rune.kt, Pet.kt, sesuai response /api/data, /api/player, /api/inventory
 4. [DONE] data/remote/ApiService.kt - interface Retrofit untuk endpoint /api/data, /api/player, /api/inventory
 5. [DONE] data/remote/RetrofitClient.kt - instance Retrofit, base URL dinamis (diisi dari hasil scan QR)
-6. data/local/ConnectionPreferences.kt - simpan base URL pakai DataStore
+6. [DONE] data/local/ConnectionPreferences.kt - simpan base URL pakai DataStore
 7. data/repository/TbhRepository.kt - gabungkan remote + local, dipakai ViewModel
 8. qr/QrScannerScreen.kt - scan QR pakai CameraX + ML Kit, hasil scan disimpan ke ConnectionPreferences
 9. ui/theme/ - Theme.kt, Color.kt, Type.kt
