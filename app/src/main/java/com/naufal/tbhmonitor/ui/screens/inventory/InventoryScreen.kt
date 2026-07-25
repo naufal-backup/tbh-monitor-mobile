@@ -11,10 +11,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -277,15 +280,31 @@ private fun ItemRow(item: Item, modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(text = "${item.itemType} #${item.itemKey}", style = MaterialTheme.typography.titleMedium)
-                Spacer(modifier = Modifier.height(2.dp))
-                Text(
-                    text = "Lv.${item.level} \u2022 x${item.quantity}" +
-                        if (item.isChaotic) " \u2022 Chaotic" else "",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+            Row(modifier = Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .background(gradeBg, CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = itemTypeIcon(item.itemType),
+                        contentDescription = item.itemType,
+                        tint = gradeColor,
+                        modifier = Modifier.size(22.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.width(12.dp))
+                Column {
+                    Text(text = "${item.itemType} #${item.itemKey}", style = MaterialTheme.typography.titleMedium)
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = "Lv.${item.level} \u2022 x${item.quantity}" +
+                            if (item.isChaotic) " \u2022 Chaotic" else "",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
             Box(
                 modifier = Modifier

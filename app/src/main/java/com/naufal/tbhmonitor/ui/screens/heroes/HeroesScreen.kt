@@ -12,13 +12,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -153,6 +160,8 @@ private fun HeroesBody(
 
 @Composable
 private fun HeroRow(hero: Hero, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    val badgeColor = if (hero.isUnlocked) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onSurfaceVariant
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -166,14 +175,30 @@ private fun HeroRow(hero: Hero, onClick: () -> Unit, modifier: Modifier = Modifi
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column {
-                Text(text = "Hero #${hero.heroKey}", style = MaterialTheme.typography.titleMedium)
-                Spacer(modifier = Modifier.height(2.dp))
-                Text(
-                    text = "Lv.${hero.level} \u2022 EXP ${formatExp(hero.exp)}",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .background(badgeColor.copy(alpha = 0.15f), CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = if (hero.isUnlocked) Icons.Filled.Person else Icons.Filled.Lock,
+                        contentDescription = null,
+                        tint = badgeColor,
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.width(12.dp))
+                Column {
+                    Text(text = "Hero #${hero.heroKey}", style = MaterialTheme.typography.titleMedium)
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = "Lv.${hero.level} \u2022 EXP ${formatExp(hero.exp)}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
             UnlockBadge(isUnlocked = hero.isUnlocked)
         }
