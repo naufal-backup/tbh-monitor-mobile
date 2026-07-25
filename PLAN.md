@@ -13,7 +13,11 @@ Arsitektur: MVVM, Jetpack Compose untuk UI, Retrofit untuk networking ke backend
 7. [DONE] data/repository/TbhRepository.kt - gabungkan remote + local, dipakai ViewModel
 8. qr/QrScannerScreen.kt - scan QR pakai CameraX + ML Kit, hasil scan disimpan ke ConnectionPreferences
 9. ui/theme/ - Theme.kt, Color.kt, Type.kt
-10. ui/navigation/NavGraph.kt - routing antar screen
+10. ui/navigation/ - Screen.kt (sealed class route + label + icon buat 4 tab), NavGraph.kt (routing), BottomNavBar.kt
+    - Bottom nav 4 tab: Dashboard, Heroes, Inventory, Runes (pakai NavigationBar Material3)
+    - ConnectScreen, QrScannerScreen, HeroDetailScreen TIDAK ikut bottom nav (disembunyikan
+      berdasarkan currentBackStackEntryAsState() route)
+    - Klik tab pakai pola popUpTo(startDestination){saveState=true} + launchSingleTop + restoreState
 11. ui/screens/connect/ConnectScreen.kt + ConnectViewModel.kt - screen awal, scan QR / input manual URL
 12. ui/screens/dashboard/DashboardScreen.kt + DashboardViewModel.kt - ringkasan gold, hero, item, progres rune
 13. ui/screens/heroes/HeroesScreen.kt, HeroDetailScreen.kt + HeroesViewModel.kt
@@ -33,6 +37,7 @@ Async
 
 UI
 - androidx.compose (bom, ui, material3, ui-tooling-preview)
+- androidx.compose.material:material-icons-extended - ikon bottom nav (Dashboard, Groups, Inventory2, AutoAwesome)
 - androidx.navigation:navigation-compose
 - androidx.lifecycle:lifecycle-viewmodel-compose
 - androidx.activity:activity-compose
