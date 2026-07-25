@@ -27,4 +27,4 @@ Mobile app ini nantinya jadi client yang consume endpoint-endpoint itu, scan QR 
 
 ## Tech stack
 
-Belum diputuskan, kandidat Flutter, React Native, atau native.
+Kotlin (native Android).
