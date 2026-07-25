@@ -4,7 +4,7 @@ Arsitektur: MVVM, Jetpack Compose untuk UI, Retrofit untuk networking ke backend
 
 ## Urutan pengerjaan
 
-1. build.gradle.kts (project & app level) - setup dependencies
+1. [DONE] build.gradle.kts (project & app level) - setup dependencies
 2. AndroidManifest.xml - permission INTERNET, CAMERA
 3. data/model/ - Player.kt, Hero.kt, Item.kt, Rune.kt, Pet.kt, sesuai response /api/data, /api/player, /api/inventory
 4. data/remote/ApiService.kt - interface Retrofit untuk endpoint /api/data, /api/player, /api/inventory
