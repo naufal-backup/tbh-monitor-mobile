@@ -20,10 +20,16 @@ Arsitektur: MVVM, Jetpack Compose untuk UI, Retrofit untuk networking ke backend
     - Klik tab pakai pola popUpTo(startDestination){saveState=true} + launchSingleTop + restoreState
 11. [DONE] ui/screens/connect/ConnectScreen.kt + ConnectViewModel.kt - screen awal, scan QR / input manual URL
 12. [DONE] ui/screens/dashboard/DashboardScreen.kt + DashboardViewModel.kt - ringkasan gold, hero, item, progres rune
-13. ui/screens/heroes/HeroesScreen.kt, HeroDetailScreen.kt + HeroesViewModel.kt
-14. ui/screens/inventory/InventoryScreen.kt + InventoryViewModel.kt - list, search, filter, sorting
-15. ui/screens/runes/RunesScreen.kt + RunesViewModel.kt - rune tree & pet
-16. MainActivity.kt - entry point, NavHost, cek koneksi yang tersimpan
+13. [DONE] ui/screens/heroes/HeroesScreen.kt, HeroDetailScreen.kt + HeroesViewModel.kt
+    - Gear per-slot (nama/stat item) belum ada padanan data-nya di mobile, HeroDetailScreen
+      masih nampilin equippedItemIds mentah (lihat catatan di ItemMeta.kt)
+14. [DONE] ui/screens/inventory/InventoryScreen.kt + InventoryViewModel.kt - list, search, filter, sorting
+    - Grade & tipe item di-derive dari itemKey lewat data/model/ItemMeta.kt (port langsung
+      dari item_grade()/item_type()/grade_name() di desktop app main.rs baris 226-253)
+15. [DONE] ui/screens/runes/RunesScreen.kt + RunesViewModel.kt - rune tree & pet
+    - "Tree" ditampilin sebagai grid progres, bukan diagram pohon literal - save data cuma
+      simpan RuneKey+Level per node, gak ada info posisi/koneksi antar-node
+16. [DONE] MainActivity.kt - entry point, NavHost, cek koneksi yang tersimpan
 
 ## Library yang diperlukan
 
