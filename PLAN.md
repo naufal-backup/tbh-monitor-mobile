@@ -19,7 +19,7 @@ Arsitektur: MVVM, Jetpack Compose untuk UI, Retrofit untuk networking ke backend
       berdasarkan currentBackStackEntryAsState() route)
     - Klik tab pakai pola popUpTo(startDestination){saveState=true} + launchSingleTop + restoreState
 11. [DONE] ui/screens/connect/ConnectScreen.kt + ConnectViewModel.kt - screen awal, scan QR / input manual URL
-12. ui/screens/dashboard/DashboardScreen.kt + DashboardViewModel.kt - ringkasan gold, hero, item, progres rune
+12. [DONE] ui/screens/dashboard/DashboardScreen.kt + DashboardViewModel.kt - ringkasan gold, hero, item, progres rune
 13. ui/screens/heroes/HeroesScreen.kt, HeroDetailScreen.kt + HeroesViewModel.kt
 14. ui/screens/inventory/InventoryScreen.kt + InventoryViewModel.kt - list, search, filter, sorting
 15. ui/screens/runes/RunesScreen.kt + RunesViewModel.kt - rune tree & pet

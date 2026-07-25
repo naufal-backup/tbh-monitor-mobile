@@ -18,11 +18,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.naufal.tbhmonitor.qr.QrScannerScreen
 import com.naufal.tbhmonitor.ui.screens.connect.ConnectScreen
+import com.naufal.tbhmonitor.ui.screens.dashboard.DashboardScreen
 
 /**
- * Root NavHost buat semua screen. Screen yang belum dibikin (Dashboard, Heroes, HeroDetail,
- * Inventory, Runes - step 12-15) sementara diisi [PlaceholderScreen] biar project ini tetap
- * compile & bisa dijalanin buat testing Connect + QrScannerScreen lebih dulu. Ganti
+ * Root NavHost buat semua screen. Screen yang belum dibikin (Heroes, HeroDetail,
+ * Inventory, Runes - step 13-15) sementara diisi [PlaceholderScreen] biar project ini
+ * tetap compile & bisa dijalanin buat testing Connect + Dashboard lebih dulu. Ganti
  * composable-nya satu-satu begitu step terkait selesai.
  */
 @Composable
@@ -68,7 +69,14 @@ fun NavGraph(
         }
 
         composable(Screen.Dashboard.route) {
-            PlaceholderScreen("DashboardScreen - step 12")
+            DashboardScreen(
+                onViewAllHeroes = { navController.navigate(Screen.Heroes.route) },
+                onDisconnected = {
+                    navController.navigate(Screen.Connect.route) {
+                        popUpTo(0) { inclusive = true }
+                    }
+                }
+            )
         }
 
         composable(Screen.Heroes.route) {
