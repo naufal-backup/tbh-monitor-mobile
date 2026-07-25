@@ -1,44 +1,30 @@
 # TBH Monitor Mobile
 
-Companion mobile app untuk **[TBH Monitor](https://github.com/naufal-backup/tbh-monitor)** (TaskbarHero Background Monitor) — aplikasi desktop yang membaca save file game **TaskbarHero** dan mengekspos datanya (gold, heroes, inventory, rune, pet) lewat REST API + QR code.
+Companion mobile app untuk TBH Monitor (TaskbarHero Background Monitor), desktop app yang baca save file game TaskbarHero dan expose datanya (gold, heroes, inventory, rune, pet) lewat REST API + QR code.
 
-Tujuan repo ini: menyediakan client mobile agar data tersebut bisa dipantau langsung dari HP, tanpa perlu buka desktop app.
+Backend: https://github.com/naufal-backup/tbh-monitor
 
-> 🚧 **Status: Planning.** Repo & README dibuat duluan, development belum dimulai.
+Status: masih planning, belum ada development.
 
-## Latar Belakang
+## Latar belakang
 
-`tbh-monitor` (desktop, Rust/egui) sudah punya fitur local API server + generate QR code untuk akses cepat dari HP. Endpoint yang tersedia saat server jalan:
+tbh-monitor (desktop) punya local API server + QR code buat akses dari HP. Endpoint yang tersedia:
 
-| Endpoint              | Deskripsi                           |
-|------------------------|---------------------------------------|
-| `GET /api/data`        | Seluruh save data mentah              |
-| `GET /api/player`      | Data player (hero, item, rune, dll)   |
-| `GET /api/inventory`   | Daftar item inventory saja            |
+- GET /api/data - seluruh save data mentah
+- GET /api/player - data player (hero, item, rune, dll)
+- GET /api/inventory - daftar item inventory
 
-Mobile app ini akan jadi client yang consume endpoint-endpoint tersebut (scan QR code dari desktop app untuk connect ke local server, biasanya lewat ngrok/local network).
+Mobile app ini nantinya jadi client yang consume endpoint-endpoint itu, scan QR dari desktop app buat connect ke server-nya.
 
-## Rencana Fitur
+## Rencana fitur
 
-- [ ] Scan QR code untuk connect ke `tbh-monitor` desktop (auto-fill base URL API)
-- [ ] Dashboard — ringkasan gold, jumlah hero, item, progres rune
-- [ ] Heroes — detail level, EXP, ability points, skill & gear per slot
-- [ ] Inventory — daftar item dengan search, filter kategori, sorting
-- [ ] Runes & Pets — progres rune tree dan daftar pet/companion
-- [ ] Auto-refresh data secara berkala
+- Scan QR code buat connect ke desktop app
+- Dashboard ringkasan gold, hero, item, progres rune
+- Detail hero: level, EXP, ability points, skill & gear
+- Inventory dengan search, filter, sorting
+- Rune tree & pet/companion
+- Auto-refresh data
 
-## Tech Stack
+## Tech stack
 
-Belum diputuskan (TBD) — kandidat: Flutter, React Native, atau native (Kotlin/Swift). Akan diupdate begitu development dimulai.
-
-## Getting Started
-
-Belum tersedia — project masih tahap planning. Instruksi setup akan ditambahkan begitu development dimulai.
-
-## Repo Terkait
-
-- Backend/desktop app: [naufal-backup/tbh-monitor](https://github.com/naufal-backup/tbh-monitor)
-
-## Disclaimer
-
-Project independen/fan-made, tidak berafiliasi dengan developer resmi TaskbarHero.
+Belum diputuskan, kandidat Flutter, React Native, atau native.
